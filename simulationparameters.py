@@ -1,4 +1,9 @@
 
+#
+# Routines for translating simulation parameters and k-point meshes
+#
+
+import numpy as np
 from scipy.constants import physical_constants as constants
 
 from pseudopotentials import qe_pppath as ppath
@@ -156,6 +161,10 @@ def get_vasp_kgrid(grid_data, debug=False):
    if grid_data["generation_style"] == "Monkhorst":
       grid = grid_data["kpoints"][0]
       offset = grid_data["shift"]
+
+   elif grid_data["generation_style"] == "Gamma":
+      grid = grid_data["kpoints"][0]
+      offset = np.zeros(3, dtype=int)
 
    if debug: print(offset)
    for sk in enumerate(offset):
