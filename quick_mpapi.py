@@ -72,9 +72,13 @@ if __name__ == "__main__":
    #
    param = vasp_to_espresso(s_data, False, False, version=espresso_version)
    # If magnetic, get starting magnetic moments
-   if param["nspin"] == 2:
-      a = set_starting_magnetization(param, a)
-      param.pop("starting_magnetization")
+   try:
+       if param["nspin"] == 2:
+           a = set_starting_magnetization(param, a)
+           param.pop("starting_magnetization")
+   except Exception as e:
+       print(e)
+       pass
 
    #
    # Set k-point grid
