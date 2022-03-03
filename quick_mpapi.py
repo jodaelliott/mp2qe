@@ -27,6 +27,8 @@ from mp_interface import get_url, get_json, print_summary
 from pseudopotentials import qe_pppath as ppath, qe_uspp_gipaw as pps
 from simulationparameters import vasp_to_espresso, set_starting_magnetization, get_vasp_kgrid 
 
+espresso_version=7.0
+
 #
 # Physical Constants
 #
@@ -68,7 +70,7 @@ if __name__ == "__main__":
    #
    # Simulation paramaters from vasp
    #
-   param = vasp_to_espresso(s_data, False, False)
+   param = vasp_to_espresso(s_data, False, False, version=espresso_version)
    # If magnetic, get starting magnetic moments
    if param["nspin"] == 2:
       a = set_starting_magnetization(param, a)

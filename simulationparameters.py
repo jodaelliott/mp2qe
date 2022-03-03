@@ -17,7 +17,7 @@ def set_espresso_param(parameters, kw, kwarg):
    parameters[kw] = kwarg
    return()
 
-def vasp_to_espresso(vasp_params, basic=False, debug=True):
+def vasp_to_espresso(vasp_params, basic=False, debug=True, version=6.7):
    #
    # Go through the vasp parameters and create dictionary of espresso parameters
    #
@@ -52,7 +52,11 @@ def vasp_to_espresso(vasp_params, basic=False, debug=True):
                set_espresso_param(espresso_params, "diagonalization", "david")
    
             elif (vasp_params[param] == "Fast") or (vasp_params[param] == "VeryFast"):
-               set_espresso_param(espresso_params, "diagonalization", "rmm-davidson")
+               if (version < 7.0):
+                  if debug: print("For QE < 7.0 RMM does not exist, reverting to davidson")
+                  set_espresso_param(espresso_params, "diagonalization", "david")
+               else:
+                  set_espresso_param(espresso_params, "diagonalization", "rmm-davidson")
    
             elif (vasp_params[param] == "All") or (vasp_params[param] == "Conjugate"):
                set_espresso_param(espresso_params, "diagonalization", "cg")
