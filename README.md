@@ -45,6 +45,11 @@ NB this set of inputs will be edited/expanded in the future.
   - Check the output <code>mp-xxxx.pwi</code> input file for obvious errors
  - Launch Quantum Espresso
    - <code>mpirun -np 4 pw.x -inp mp-xxxx.pwi</code> 
+ 
+## WARNING
+
+Do not push updates of this code that contain your personal Materials Project API key: "Please keep your API key safe and you should never share your key with anyone. If your key is compromised, you can regenerate the key again by visiting your dashboard page."
+
 All the best,
 Josh
 
